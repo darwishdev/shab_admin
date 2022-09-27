@@ -1,0 +1,53 @@
+.chat-card {
+  -webkit-transform: translateZ(0);
+          transform: translateZ(0);
+}
+
+.chat-msgs {
+  height: calc(100vh - 200px);
+  overflow: scroll;
+  padding-bottom: 100px;
+}
+
+.actions {
+  position: fixed;
+  background: var(--main-gredient);
+  bottom: 0;
+  right: 0;
+  width: 100%;
+}
+
+.chat-msg {
+  background: var(--chat-bg-1);
+  border-radius: 15px;
+}
+
+.his .chat-msg {
+  background: var(--bg-4);
+  text-align: left;
+}
+
+.his .chat-name {
+  text-align: left;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.chat-name {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.msg-wrapper {
+  margin: 20px 0;
+}
+
+.chat-title {
+  background: var(--main-gredient);
+  padding: 0 !important;
+}
+/*# sourceMappingURL=chat.css.map */

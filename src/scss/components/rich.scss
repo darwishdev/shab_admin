@@ -1,0 +1,27 @@
+
+@import "../../../node_modules/@syncfusion/ej2-base/styles/material.css";
+@import "../../../node_modules/@syncfusion/ej2-inputs/styles/material.css";
+@import "../../../node_modules/@syncfusion/ej2-lists/styles/material.css";
+@import "../../../node_modules/@syncfusion/ej2-popups/styles/material.css";
+@import "../../../node_modules/@syncfusion/ej2-buttons/styles/material.css";
+@import "../../../node_modules/@syncfusion/ej2-navigations/styles/material.css";
+@import "../../../node_modules/@syncfusion/ej2-splitbuttons/styles/material.css";
+@import "../../../node_modules/@syncfusion/ej2-vue-richtexteditor/styles/material.css";
+.e-toolbar .e-toolbar-items .e-toolbar-item.e-overlay,.e-toolbar .e-toolbar-items , .e-richtexteditor .e-rte-toolbar.e-control[class*="e-toolbar"], .e-richtexteditor .e-rte-toolbar.e-toolbar.e-extended-toolbar.e-control[class*="e-toolbar"]{
+    background-color: var(--bgdarker3) !important;
+}
+.e-toolbar .e-toolbar-items .e-toolbar-item .e-tbar-btn.e-btn{
+    background: var(--main-gredient);
+    color: #fff;
+}
+.e-richtexteditor .e-rte-toolbar .e-toolbar-item .e-icons{
+    color: #fff;
+}
+.e-toolbar .e-toolbar-items .e-toolbar-item .e-tbar-btn.e-btn .e-icons.e-btn-icon{
+    color: #fff;
+}
+.e-richtexteditor .e-rte-content{
+    background-color: var(--bgdarker2);
+    color: var(--text-color) !important;
+    
+}

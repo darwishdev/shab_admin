@@ -1,0 +1,22 @@
+@import url('./variables.scss');
+@import url('./overrides.scss');
+@import url('./font.scss');
+@import url('./sidebar.css');
+@import url('./utilities.css');
+@import url('./view.css');
+@import url('./ltr.css');
+ 
+@import "../../../node_modules/@syncfusion/ej2-base/styles/material.css";
+@import "../../../node_modules/@syncfusion/ej2-inputs/styles/material.css";
+@import "../../../node_modules/@syncfusion/ej2-lists/styles/material.css";
+@import "../../../node_modules/@syncfusion/ej2-popups/styles/material.css";
+@import "../../../node_modules/@syncfusion/ej2-buttons/styles/material.css";
+@import "../../../node_modules/@syncfusion/ej2-navigations/styles/material.css";
+@import "../../../node_modules/@syncfusion/ej2-splitbuttons/styles/material.css";
+@import "../../../node_modules/@syncfusion/ej2-vue-richtexteditor/styles/material.css";
+#js-licensing{
+    // top: -100px !important;
+    display: none;
+    opacity: 0;
+    top:-1000px;
+}
