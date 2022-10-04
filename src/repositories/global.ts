@@ -21,6 +21,26 @@ export const Upload = (payload:Object) => {
 
 
 
+
+
+export const ImportExcel = (table: string , fileName:string) => {
+    return new Promise((resolve, reject) => {
+        Http.post(`${table}/upload?file=${fileName}`   , {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+          })
+        .then((d) => {
+            resolve(d)
+        }).catch((e:any) => {
+            reject(e)
+        })
+    })
+}
+
+
+
+
 export const Delete = (payload:any) => {
     return new Promise((resolve, reject) => {
         Http.delete(`delete/${payload.table}/${payload.id}`)

@@ -15,7 +15,6 @@ const routes: Array<RouteConfig> = [
         path: "/",
         name: "Home",
         component: Home,
-        
       },
       // users rotues
       {

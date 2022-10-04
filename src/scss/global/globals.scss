@@ -20,3 +20,14 @@
     opacity: 0;
     top:-1000px;
 }
+
+
+.upload-file-input{
+    padding: 0;
+    background: var(--main-gredient);
+    margin: 0;
+}
+
+.upload-file-input .theme--dark.v-text-field > .v-input__control > .v-input__slot::before {
+    display: none;
+}

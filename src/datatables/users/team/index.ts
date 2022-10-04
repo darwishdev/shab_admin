@@ -1,4 +1,4 @@
-import { CreateAction, DownloadExcelAction, UploadExcelAction } from './../../../utils/datatable/factory';
+import { CreateAction, DownloadExcelAction, UploadExcelAction } from '@/utils/datatable/factory';
 import DatatableIntetrface from '@/utils/datatable/datatableInterface'
 import Datatable  from '@/utils/datatable/datatable'
 import { HeaderInterface } from '@/utils/datatable/header/headerInterface';
@@ -20,7 +20,8 @@ const params:DatatableIntetrface = {
     headers ,
     url,
     filters,
-    globaleActions:[CreateAction , DownloadExcelAction , UploadExcelAction],
+    importExcel:true,
+    globaleActions:[CreateAction , DownloadExcelAction],
     title:"team",
 }
 const datatable = new Datatable(params)

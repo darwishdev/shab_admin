@@ -1,4 +1,4 @@
-import { Delete } from "@/repositories/global"
+import { Delete, Upload } from "@/repositories/global"
 import {Respond} from "@/repositories/requests"
 import store  from '@/store'
 import { bus } from '@/main'
@@ -38,19 +38,7 @@ export const UploadExcelAction : GlobaleTableAction = {
   title:'upload_excel',
   icon:'mdi-upload-outline',
   action:() => {
-    console.log("router.currentRoute.query")
-    console.log(router.currentRoute)
-    UsersExcel(router.currentRoute.name , router.currentRoute.query).then((r: any) => {
-      let source = `${process.env.VUE_APP_IMG_URL}${r}`;
-      console.log(source);
-      console.log(r);
-      var el = document.createElement("a");
-      el.setAttribute("href", source);
-      el.setAttribute("target", "_blank");
-      document.body.appendChild(el);
-      el.click();
-      el.remove();
-    })
+    // Upload()
   }
 
 }

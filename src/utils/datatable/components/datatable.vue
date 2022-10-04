@@ -1,4 +1,3 @@
-
 <template>
   <div>
     <v-container>
@@ -24,14 +23,39 @@
                     ><v-icon>{{ table.icon }}</v-icon>
                     {{ table.title }}
                   </span>
-                  <div class="btns">
-                     <v-btn class="gr-bg mx-2" v-if="hasCategories" dark @click.prevent="$router.push(`/categories/${table.title}`)">
+                  <div class="table-header-btns btns d-flex">
+                    <v-btn
+                      class="gr-bg mx-2"
+                      v-if="hasCategories"
+                      dark
+                      @click.prevent="
+                        $router.push(`/categories/${table.title}`)
+                      "
+                    >
                       <v-icon class="mx-3"
                         >mdi-dots-horizontal-circle-outline</v-icon
                       >
                       {{ $t("categories") }}
                     </v-btn>
-                    <v-btn class="gr-bg mx-2" v-if="hasCities" dark @click.prevent="$router.push(`/cities`)">
+                    <v-file-input
+                      v-if="
+                        ['consultunts', 'team', 'users_requests' ,  'articles'].includes(
+                          table.title
+                        )
+                      "
+                      @change="uploadExcel"
+                      v-model="file"
+                      hide-details
+                      prepend-icon="mdi-upload-outline"
+                      label="استيراد اكسل"
+                      class="upload-file-input"
+                    ></v-file-input>
+                    <v-btn
+                      class="gr-bg mx-2"
+                      v-if="hasCities"
+                      dark
+                      @click.prevent="$router.push(`/cities`)"
+                    >
                       <v-icon class="mx-3"
                         >mdi-dots-horizontal-circle-outline</v-icon
                       >
@@ -42,7 +66,13 @@
                         v-if="table.globaleActions"
                         v-slot:activator="{ on, attrs }"
                       >
-                        <v-btn class="gr-bg" dark v-bind="attrs" prepen v-on="on">
+                        <v-btn
+                          class="gr-bg"
+                          dark
+                          v-bind="attrs"
+                          prepen
+                          v-on="on"
+                        >
                           <v-icon class="mr-3 ml-3"
                             >mdi-dots-horizontal-circle-outline</v-icon
                           >
@@ -52,14 +82,18 @@
 
                       <v-list>
                         <v-list-item
-                        v-for="(item , index) in table.globaleActions" :key="index"
+                          v-for="(item, index) in table.globaleActions"
+                          :key="index"
                           @click.prevent="item.action"
                         >
                           <v-list-item-title
-                            ><v-icon class="mr-3 ml-3" v-if="item.icon">{{item.icon}}</v-icon>
-                            {{$t(item.title) }}</v-list-item-title
+                            ><v-icon class="mr-3 ml-3" v-if="item.icon">{{
+                              item.icon
+                            }}</v-icon>
+                            {{ $t(item.title) }}</v-list-item-title
                           >
                         </v-list-item>
+
                         <!-- <v-list-item
                           @click.prevent="downloadExcel"
                           v-if="table.title == 'users'"
@@ -72,8 +106,6 @@
                         </v-list-item> -->
                       </v-list>
                     </v-menu>
-                   
-
                   </div>
                 </div>
                 <div class="pa-4" v-if="table.hasFilters">
@@ -243,8 +275,9 @@
 
 <script lang="ts">
 import Datatable from "@/utils/datatable/datatable";
-import router from '@/router'
+import router from "@/router";
 import { bus } from "@/main";
+import FileInput from "@/utils/form/components/File.vue";
 import {
   addParamsToLocation,
   currency,
@@ -253,7 +286,9 @@ import {
 import AppForm from "@/utils/form/components/Form.vue";
 import Vue from "vue";
 import { HeaderInterface } from "../header/headerInterface";
+import { Upload, ImportExcel } from "@/repositories/global";
 // import { UsersExcel } from "@/repositories/user";
+import { removeBasePathFromImage } from "@/utils/helpers";
 export default Vue.extend({
   props: {
     table: Datatable,
@@ -263,6 +298,8 @@ export default Vue.extend({
       approvedServiceId: 0,
       msgModal: false,
       page: 1,
+      path: "",
+      file: null as Blob | null,
       itemsPerPage: 10,
       pageCount: 0,
 
@@ -273,6 +310,7 @@ export default Vue.extend({
   },
   components: {
     AppForm,
+    FileInput,
   },
   computed: {
     totalsHeaders() {
@@ -280,11 +318,16 @@ export default Vue.extend({
         return header.isPrice ? header : "";
       });
     },
-    hasCategories(){
-      return this.table.title == 'videos' ||  this.table.title == 'projects' ||  this.table.title == 'articles' ||  this.table.title == 'events'
+    hasCategories() {
+      return (
+        this.table.title == "videos" ||
+        this.table.title == "projects" ||
+        this.table.title == "articles" ||
+        this.table.title == "events"
+      );
     },
-    hasCities(){
-      return   this.table.title == 'projects' ||  this.table.title == 'events'
+    hasCities() {
+      return this.table.title == "projects" || this.table.title == "events";
     },
 
     from() {
@@ -318,6 +361,17 @@ export default Vue.extend({
     },
     showTotals() {
       this.dialog = true;
+    },
+    uploadExcel() {
+      let formData = new FormData();
+      formData.append("file", this.file as Blob);
+      Upload(formData).then((d) => {
+        const fileName = removeBasePathFromImage(d as string);
+        ImportExcel(this.$route.name, fileName).then(() => {
+          this.table.getData();
+          this.file = null as Blob
+        });
+      });
     },
   },
   created() {

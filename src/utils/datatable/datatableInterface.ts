@@ -14,6 +14,7 @@ export default interface DatatableIntetrface {
     title?: string
     icon?: string
     description?:string
+    importExcel?:boolean
     url:string
     itemActions?: GlobaleTableAction[]
     globaleActions? : GlobaleTableAction[]

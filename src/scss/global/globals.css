@@ -41430,3 +41430,23 @@ span.e-table-box.e-rbox-select {
   opacity: 0;
   top: -1000px;
 }
+
+
+
+
+.upload-file-input{
+    padding: 0;
+    background: var(--main-gredient);
+    margin: 0;
+    border-radius: 5px;
+    margin-left:20px
+}
+
+.upload-file-input .v-input__slot::before ,.upload-file-input .v-input__slot::after {
+    display: none !important;
+}
+
+.table-header-btns{
+  min-width:300px;
+  justify-content: flex-end;
+}
